@@ -8,8 +8,7 @@
   :root { --bg:#0e1116; --fg:#e8ecf1; --muted:#8b95a3; --line:#2a313c; --accent:#5ab0ff; }
   html, body { margin:0; height:100%; background:#000; overflow:hidden;
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--fg); }
-
-  /* Prompt screen */
+  
   #prompt { position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
     background:var(--bg); padding:24px; box-sizing:border-box; }
   #prompt .box { width:100%; max-width:560px; }
@@ -23,11 +22,10 @@
     background:var(--accent); border:0; border-radius:8px; cursor:pointer; }
   #err { min-height:1.4em; margin-top:10px; color:#ff8a8a; font-size:.9rem; }
 
-  /* Player */
   #stage { position:fixed; inset:0; display:none; background:#000; }
   #stage.on { display:block; }
   #stage iframe { position:absolute; inset:0; width:100%; height:100%; border:0; pointer-events:none; }
-  /* Shield swallows every mouse event once playing */
+
   #shield { position:absolute; inset:0; z-index:5; cursor:none; }
   body.playing, body.playing * { cursor:none !important; }
 </style>
@@ -80,7 +78,6 @@
     } catch (e) { return null; }
   }
 
-  // Load the YouTube IFrame API
   var tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';
   document.head.appendChild(tag);
@@ -140,7 +137,6 @@
   document.getElementById('go').addEventListener('click', submit);
   input.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
 
-  // Ignore all mouse input once the video is playing
   ['click','dblclick','mousedown','mouseup','mousemove','mouseover','mouseenter',
    'wheel','contextmenu','auxclick','pointerdown','pointerup','pointermove','touchstart','touchmove']
     .forEach(function (type) {
@@ -150,7 +146,6 @@
     if (document.body.classList.contains('playing')) e.preventDefault();
   });
 
-  // Optional: skip the prompt with ?v=LINK_OR_ID
   var q = new URLSearchParams(location.search).get('v');
   if (q && parseId(q)) { pendingId = parseId(q); }
 </script>
